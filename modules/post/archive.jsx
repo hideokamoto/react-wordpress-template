@@ -5,7 +5,6 @@ var ReactDOM = require('react-dom');
 // Component
 var Post = React.createClass({
 	render: function() {
-		console.log(this.props.post);
 		return(
 			<div>
 				<h3 className="page-header">{this.props.post.title.rendered}</h3>
