@@ -24,7 +24,6 @@ var PostList = React.createClass({
 		});
 		return (
 			<div className="postList">
-				<h2 className="page-header">WordCamp Central Informations</h2>
 				{postNodes}
 			</div>
 		);
