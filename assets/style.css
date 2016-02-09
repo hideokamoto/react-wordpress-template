@@ -90,3 +90,47 @@ html,body,.app{
 	padding-right : 40px;
 }
 .intro.title a { color: #fff; }
+
+.menuList {
+	display: -webkit-box;
+    display: -moz-box;
+    display: box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+    box-pack: center;
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    -o-justify-content: center;
+    justify-content: center;
+    -ms-flex-pack: center;
+    font-family: "futura-pt", sans-serif;
+    font-weight: 600;
+    list-style: none;
+    height: 50px;
+    line-height: 50px;
+    margin: 0 auto;
+    padding: 0;
+    color: white;
+    letter-spacing: 0.05rem;
+    text-transform: uppercase;
+}
+.menuItem {
+	-webkit-box-flex: 0;
+    -moz-box-flex: 0;
+    box-flex: 0;
+    -webkit-flex: 0 1 1;
+    -moz-flex: 0 1 1;
+    -ms-flex: 0 1 1;
+    flex: 0 1 1;
+	text-decoration: none;
+    color: white;
+    text-align: center;
+    display: block;
+    padding: 0 20px;
+    white-space: nowrap;
+}
