@@ -3,39 +3,51 @@ var rootAPI = 'http://wp-kyoto.net/wp-json/';
 var API  = rootAPI + 'wp/v2/';
 
 // Load Reacts
-var React = require('react');
-var ReactDOM = require('react-dom');
+import React from 'react'
+import { render } from 'react-dom'
 
-//Load Component
+// First we import some modules...
+import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router'
+
+
+/*Load Component
 var Header  = require('../modules/meta/header.jsx');
 var Menu  = require('../modules/meta/menu.jsx');
-var Intro  = require('../modules/top/intro.jsx');
 var Archive = require('../modules/post/archive.jsx');
+*/
+const Menu  = require('../modules/meta/menu.jsx');
+const Intro  = require('../modules/top/intro.jsx');
 
-// Render
-if ( document.getElementById('top') ) {
-	ReactDOM.render(
-		<Intro apiPath={rootAPI}/>,
-		document.getElementById('top')
-	);
-}
-if ( document.getElementById('menu') ) {
-	ReactDOM.render(
-		<Menu apiPath={rootAPI}/>,
-		document.getElementById('menu')
-	);
-}
+const Home = React.createClass({
+  render() {
+    return (
+      <div className="content topimg fullHeight"  id="top">
+		<Intro apiPath={rootAPI}/>
+      </div>
+    )
+  }
+})
 
-if ( document.getElementById('header') ) {
-	ReactDOM.render(
-		<Header apiPath={rootAPI}/>,
-		document.getElementById('header')
-	);
-}
+const App = React.createClass({
+  render() {
+    return (
+      <div className="fullHeight">
+	  	<Menu apiPath={rootAPI}/>
+        {/*
+          next we replace `<Child>` with `this.props.children`
+          the router will figure out the children for us
+        */}
+        {this.props.children}
+      </div>
+    )
+  }
+})
 
-if ( document.getElementById('content') ) {
-	ReactDOM.render(
-		<Archive apiPath={API}/>,
-		document.getElementById('content')
-	);
-}
+//Router
+render((
+  <Router history={hashHistory}>
+    <Route path="/" component={App}>
+      <IndexRoute component={Home}/>
+    </Route>
+  </Router>
+), document.getElementById('app'))

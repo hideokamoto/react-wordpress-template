@@ -50,7 +50,9 @@ var Menu = React.createClass({
 	},
 	render: function() {
 		return (
-			<MenuList data={this.state.data} />
+			<div className="menu">
+				<MenuList data={this.state.data} />
+			</div>
 		);
 	}
 });
