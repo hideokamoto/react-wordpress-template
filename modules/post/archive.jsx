@@ -1,6 +1,6 @@
-// Load Reacts
-var React = require('react');
-var ReactDOM = require('react-dom');
+import React from 'react'
+import { render } from 'react-dom'
+import { Link } from 'react-router'
 
 // Component
 var Post = React.createClass({
@@ -23,14 +23,14 @@ var PostList = React.createClass({
 			);
 		});
 		return (
-			<div className="postList">
+			<div className="postList contentInner">
 				{postNodes}
 			</div>
 		);
 	}
 });
 
-var Archive = React.createClass({
+var PostArchive = React.createClass({
 	loadPostsFromServer: function() {
 		$.ajax({
 			url: this.props.apiPath + 'posts',
@@ -59,4 +59,4 @@ var Archive = React.createClass({
 	}
 });
 
-module.exports = Archive;
+module.exports = PostArchive;
