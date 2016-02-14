@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { Router, Link } from 'react-router'
+import { Link } from 'react-router'
 
 // Component
 var Single = React.createClass({
@@ -19,7 +19,6 @@ var Single = React.createClass({
 	},
 	render: function() {
 		var post = this.getPostContent();
-		console.log(post);
 		return (
 			<div className="postList contentInner">
 				<h3 className="postTitle page-header">{post.title.rendered}</h3>
@@ -37,6 +36,7 @@ var PostSingle = React.createClass({
 			type: "GET",
 			url: this.props.apiPath + 'posts?_embed&filter[name]=' + this.props.slug,
 			dataType: 'json',
+			cache: false,
 			success: function(data) {
 				this.setState({data: data[0]});
 			}.bind(this),
