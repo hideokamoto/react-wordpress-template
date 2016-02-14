@@ -34,6 +34,17 @@ const PostArchiveRow = React.createClass({
   }
 })
 
+const PostSingle = require('../modules/post/single.jsx');
+const PostSingleRow = React.createClass({
+  render() {
+    return (
+      <div className="content fullHeight" >
+		<PostSingle apiPath={API} slug={this.props.params.slug}/>
+      </div>
+    )
+  }
+})
+
 const App = React.createClass({
   render() {
     return (
@@ -54,7 +65,9 @@ render((
   <Router history={hashHistory}>
     <Route path="/" component={App}>
       <IndexRoute component={Home}/>
-      <Route path="blog" component={PostArchiveRow} />
+      <Route path="/blog" component={PostArchiveRow} />
+		<Route path="/blog/:slug" component={PostSingleRow}>
+	  </Route>
     </Route>
   </Router>
 ), document.getElementById('app'))

@@ -29,6 +29,7 @@ var MenuList = React.createClass({
 var Menu = React.createClass({
 	loadPostsFromServer: function() {
 		$.ajax({
+			type: "GET",
 			url: this.props.apiPath + 'wp-api-menus/v2/menu-locations/menu-api',
 			dataType: 'json',
 			cache: false,

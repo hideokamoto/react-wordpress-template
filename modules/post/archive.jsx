@@ -5,11 +5,12 @@ import { Link } from 'react-router'
 // Component
 var Post = React.createClass({
 	render: function() {
+		var linkAddress = '/blog/' + this.props.post.slug;
 		return(
-			<div>
-				<h3 className="page-header">{this.props.post.title.rendered}</h3>
+			<Link to={{ pathname: linkAddress, state: { postId: this.props.post.id } }} className="postList page-header">
+				<h3 className="postListTitle">{this.props.post.title.rendered}</h3>
 				<div dangerouslySetInnerHTML={{__html: this.props.post.excerpt.rendered}} />
-			</div>
+			</Link>
 		);
 	}
 });
@@ -17,7 +18,6 @@ var Post = React.createClass({
 var PostList = React.createClass({
 	render: function() {
 		var postNodes = this.props.postData.map(function (post) {
-		console.log(post);
 			return (
 				<Post post={post} key={post.id}/ >
 			);
@@ -33,9 +33,9 @@ var PostList = React.createClass({
 var PostArchive = React.createClass({
 	loadPostsFromServer: function() {
 		$.ajax({
+			type: "GET",
 			url: this.props.apiPath + 'posts',
 			dataType: 'json',
-			cache: false,
 			success: function(data) {
 				this.setState({data: data});
 			}.bind(this),

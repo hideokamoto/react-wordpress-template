@@ -17,6 +17,7 @@ var Title = React.createClass({
 var Intro = React.createClass({
 	loadPostsFromServer: function() {
 		$.ajax({
+			type: "GET",
 			url: this.props.apiPath,
 			dataType: 'json',
 			cache: false,

@@ -18,6 +18,7 @@ var NavList = React.createClass({
 var Nav = React.createClass({
 	loadPostsFromServer: function() {
 		$.ajax({
+			type: "GET",
 			url: this.props.apiPath,
 			dataType: 'json',
 			cache: false,

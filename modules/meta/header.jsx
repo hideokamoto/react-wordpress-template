@@ -19,6 +19,7 @@ var Head = React.createClass({
 var Header = React.createClass({
 	loadPostsFromServer: function() {
 		$.ajax({
+			type: "GET",
 			url: this.props.apiPath,
 			dataType: 'json',
 			cache: false,
