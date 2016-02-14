@@ -7,23 +7,23 @@ var Single = React.createClass({
 	getPostContent: function() {
 		if ( ! this.props.postData ) {
 			var content  = {
-				title: {
-					rendered : 'Loading...'
-				},
-				content: {
-					rendered : ''
-				}
+				title: { rendered : 'Loading...' },
+				content: { rendered : '' },
+				date: ''
 			};
 		} else {
 			var content = this.props.postData;
+			content['date'] = new Date(content.date_gmt).toLocaleDateString();
 		}
 		return content;
 	},
 	render: function() {
 		var post = this.getPostContent();
+		console.log(post);
 		return (
 			<div className="postList contentInner">
-				<h3 className="postListTitle">{post.title.rendered}</h3>
+				<h3 className="postTitle page-header">{post.title.rendered}</h3>
+				<p>{post.date}</p>
 				<div dangerouslySetInnerHTML={{__html: post.content.rendered}} />
 			</div>
 		);
@@ -35,7 +35,7 @@ var PostSingle = React.createClass({
 	loadPostsFromServer: function() {
 		$.ajax({
 			type: "GET",
-			url: this.props.apiPath + 'posts?filter[name]=' + this.props.slug,
+			url: this.props.apiPath + 'posts?_embed&filter[name]=' + this.props.slug,
 			dataType: 'json',
 			success: function(data) {
 				this.setState({data: data[0]});

@@ -6,9 +6,11 @@ import { Link } from 'react-router'
 var Post = React.createClass({
 	render: function() {
 		var linkAddress = '/blog/' + this.props.post.slug;
+		var date = new Date(this.props.post.date_gmt).toLocaleDateString();
 		return(
 			<Link to={{ pathname: linkAddress, state: { postId: this.props.post.id } }} className="postList page-header">
-				<h3 className="postListTitle">{this.props.post.title.rendered}</h3>
+				<h3 className="postTitle">{this.props.post.title.rendered}</h3>
+				<p>{date}</p>
 				<div dangerouslySetInnerHTML={{__html: this.props.post.excerpt.rendered}} />
 			</Link>
 		);
@@ -23,7 +25,7 @@ var PostList = React.createClass({
 			);
 		});
 		return (
-			<div className="postList contentInner">
+			<div className="contentInner">
 				{postNodes}
 			</div>
 		);
