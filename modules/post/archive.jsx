@@ -35,7 +35,7 @@ var PostList = React.createClass({
 
 var PostArchive = React.createClass({
 	loadPostsFromServer: function() {
-		var initialQuery = '?per_page=' + this.state.per_page + '&page=' + this.state.page;
+		var initialQuery = '?per_page=' + this.state.per_page;
 		var apiPath = this.props.apiPath + 'posts' + initialQuery + '&' + this.state.query;
 		$.ajax({
 			type: "GET",
@@ -44,7 +44,6 @@ var PostArchive = React.createClass({
 			cache: false,
 			success: function(data) {
 				this.setState({data: data});
-				console.log(apiPath);
 			}.bind(this),
 			error: function(xhr, status, err) {
 				console.error(this.props.url, status, err.toString());
@@ -56,17 +55,25 @@ var PostArchive = React.createClass({
 			data: [],
 			query: '',
 			per_page: 10,
+			default_per_page: 10,
 			page: 1,
 		};
 	},
 	componentDidMount: function() {
 		this.loadPostsFromServer();
 	},
+	addNextPage: function( next ) {
+		this.setState({ per_page: next.per_page, page: next.page } );
+		this.forceUpdate( this.loadPostsFromServer );
+	},
 	render: function() {
 		return (
 			<div className="contentInner">
 				<PostList postData={this.state.data} />
-				<PostNav initialPage={this.state.page} initialPerPage={this.state.per_page}/>
+				<PostNav
+					page={this.state.page}
+					perPage={this.state.default_per_page}
+					onClickNextPage={this.addNextPage}/>
 			</div>
 		);
 	}

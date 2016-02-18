@@ -3,27 +3,18 @@ import { render } from 'react-dom'
 
 // Component
 var PostNav = React.createClass({
-	getNextPageNavigation: function() {
-		console.log(this.state.per_page);
-		console.log(this.state.page);
-	},
-	getDefaultProps: function() {
-		return {
-			initialPage: 1,
-			initialPerPage: 10
+	nextPage: function() {
+		var page = this.props.page + 1;
+		var next = {
+			page : page,
+			per_page : this.props.perPage * page
 		}
-	},
-	getInitialState: function() {
-		return {
-			page: this.props.initialPage,
-			per_page: this.props.initialPerPage
-		};
+		this.props.onClickNextPage( next );
 	},
 	render: function() {
-		this.getNextPageNavigation();
 		return (
-			<a className="archiveNext page-header postList">
-				<h3>Lead More {this.state.per_page} Posts</h3>
+			<a className="archiveNext page-header postList" onClick={this.nextPage}>
+				<h3>Lead More {this.props.perPage} Posts</h3>
 			</a>
 		);
 	}
