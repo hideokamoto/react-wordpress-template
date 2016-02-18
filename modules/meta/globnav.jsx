@@ -9,6 +9,8 @@ var NavList = React.createClass({
 			<div className="menuList">
 				<Link to="/" className="menuItem">{this.props.data.name}</Link>
 				<Link to="/blog" className="menuItem">Blog</Link>
+				<Link to="/about" className="menuItem">About</Link>
+				<Link to="/contributing-to-wordpress" className="menuItem">Contributing WordPress</Link>
 			</div>
 		);
 	}

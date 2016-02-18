@@ -29,12 +29,13 @@ var Single = React.createClass({
 	}
 });
 
-var PostSingle = React.createClass({
+var Page = React.createClass({
 	mixins: [ Router.State ],
 	loadPostsFromServer: function() {
+	console.log(this.props.slug);
 		$.ajax({
 			type: "GET",
-			url: this.props.apiPath + 'posts?_embed&filter[name]=' + this.props.slug,
+			url: this.props.apiPath + 'pages?_embed&filter[name]=' + this.props.slug,
 			dataType: 'json',
 			cache: false,
 			success: function(data) {
@@ -60,4 +61,4 @@ var PostSingle = React.createClass({
 	}
 });
 
-module.exports = PostSingle;
+module.exports = Page;

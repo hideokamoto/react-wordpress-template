@@ -23,6 +23,7 @@ const Home = React.createClass({
     )
   }
 })
+
 const PostArchive = require('../modules/post/archive.jsx');
 const PostArchiveRow = React.createClass({
   render() {
@@ -33,13 +34,32 @@ const PostArchiveRow = React.createClass({
     )
   }
 })
-
 const PostSingle = require('../modules/post/single.jsx');
 const PostSingleRow = React.createClass({
   render() {
     return (
       <div className="content fullHeight" >
 		<PostSingle apiPath={API} slug={this.props.params.slug}/>
+      </div>
+    )
+  }
+})
+
+const Page = require('../modules/page/page.jsx');
+const About = React.createClass({
+  render() {
+    return (
+      <div className="content fullHeight" >
+		<Page apiPath={API} slug='about'/>
+      </div>
+    )
+  }
+})
+const Contribute = React.createClass({
+  render() {
+    return (
+      <div className="content fullHeight" >
+		<Page apiPath={API} slug='contributing-to-wordpress'/>
       </div>
     )
   }
@@ -66,8 +86,9 @@ render((
     <Route path="/" component={App}>
       <IndexRoute component={Home}/>
       <Route path="/blog" component={PostArchiveRow} />
-		<Route path="/blog/:slug" component={PostSingleRow}>
-	  </Route>
+	  <Route path="/blog/:slug" component={PostSingleRow} />
+	  <Route path="/about" component={About} />
+	  <Route path="/contributing-to-wordpress" component={Contribute} />
     </Route>
   </Router>
 ), document.getElementById('app'))
