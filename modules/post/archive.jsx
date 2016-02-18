@@ -3,6 +3,8 @@ import { render } from 'react-dom'
 import { Link } from 'react-router'
 
 // Component
+var PostNav  = require('./nav.jsx');
+
 var Post = React.createClass({
 	render: function() {
 		var linkAddress = '/blog/' + this.props.post.slug;
@@ -24,7 +26,7 @@ var PostList = React.createClass({
 			);
 		});
 		return (
-			<div className="contentInner">
+			<div>
 				{postNodes}
 			</div>
 		);
@@ -33,13 +35,16 @@ var PostList = React.createClass({
 
 var PostArchive = React.createClass({
 	loadPostsFromServer: function() {
+		var initialQuery = '?per_page=' + this.state.per_page + '&page=' + this.state.page;
+		var apiPath = this.props.apiPath + 'posts' + initialQuery + '&' + this.state.query;
 		$.ajax({
 			type: "GET",
-			url: this.props.apiPath + 'posts',
+			url: apiPath,
 			dataType: 'json',
 			cache: false,
 			success: function(data) {
 				this.setState({data: data});
+				console.log(apiPath);
 			}.bind(this),
 			error: function(xhr, status, err) {
 				console.error(this.props.url, status, err.toString());
@@ -48,7 +53,10 @@ var PostArchive = React.createClass({
 	},
 	getInitialState: function() {
 		return {
-			data: []
+			data: [],
+			query: '',
+			per_page: 10,
+			page: 1,
 		};
 	},
 	componentDidMount: function() {
@@ -56,7 +64,10 @@ var PostArchive = React.createClass({
 	},
 	render: function() {
 		return (
-			<PostList postData={this.state.data} />
+			<div className="contentInner">
+				<PostList postData={this.state.data} />
+				<PostNav initialPage={this.state.page} initialPerPage={this.state.per_page}/>
+			</div>
 		);
 	}
 });
