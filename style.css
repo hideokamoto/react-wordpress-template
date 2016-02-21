@@ -5,6 +5,9 @@ html,body,.fullHeight{
 #app > div{
 	padding: 50px 0 0;
 }
+.admin-bar .menu {
+    top: 32px;
+}
 .menu{
 	background: #000;
 	position: fixed;
