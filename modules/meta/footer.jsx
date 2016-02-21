@@ -17,7 +17,7 @@ var Footer = React.createClass({
 	render: function() {
 		var menuAPI = this.props.apiPath + 'wp-api-menus/v2/';
 		var footerMenuApi = menuAPI + 'menu-locations/menu-api';
-		var footerSubMenuApi = menuAPI + 'menu-locations/menu-api';
+		var footerSubMenuApi = menuAPI + 'menu-locations/sub-menu-api';
 		return (
 			<div className="footer">
 				<FooterMenu apiPath={footerMenuApi} prefix='footer'/>
