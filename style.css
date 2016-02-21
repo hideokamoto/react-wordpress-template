@@ -36,7 +36,7 @@ html,body,.fullHeight{
 	-ms-flex-direction: column;
 }
 .content.topimg{
-	background-image: url(img/topimg.jpg);
+	background-image: url(assets/img/topimg.jpg);
 	background-size: cover;
 }
 .contentInner {
