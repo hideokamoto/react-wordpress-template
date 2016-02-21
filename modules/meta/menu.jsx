@@ -5,21 +5,24 @@ var ReactDOM = require('react-dom');
 // Component
 var MenuItem = React.createClass({
 	render: function() {
+		var ClassName = this.props.prefix + 'MenuItem';
 		return(
-			<a className="menuItem" href={this.props.item.url}>{this.props.item.title}</a>
+			<a className={ClassName} href={this.props.item.url}>{this.props.item.title}</a>
 		);
 	}
 });
 
 var MenuList = React.createClass({
 	render: function() {
+		var prefix = this.props.prefix;
+		var ClassName = prefix + 'MenuList';
 		var menuNodes = this.props.data.map(function (item) {
 			return (
-				<MenuItem item={item} key={item.id}/ >
+				<MenuItem item={item} key={item.id} prefix={prefix}/ >
 			);
 		});
 		return (
-			<div className="menuList">
+			<div className={ClassName}>
 				{menuNodes}
 			</div>
 		);
@@ -30,7 +33,7 @@ var Menu = React.createClass({
 	loadPostsFromServer: function() {
 		$.ajax({
 			type: "GET",
-			url: this.props.apiPath + 'wp-api-menus/v2/menu-locations/menu-api',
+			url: this.props.apiPath,
 			dataType: 'json',
 			cache: false,
 			success: function(data) {
@@ -51,9 +54,7 @@ var Menu = React.createClass({
 	},
 	render: function() {
 		return (
-			<div className="menu">
-				<MenuList data={this.state.data} />
-			</div>
+			<MenuList data={this.state.data} prefix={this.props.prefix}/>
 		);
 	}
 });

@@ -12,6 +12,7 @@ import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router'
 var Header  = require('../modules/meta/header.jsx');
 var Menu  = require('../modules/meta/menu.jsx');
 */
+const Footer = require('../modules/meta/footer.jsx');
 const Nav  = require('../modules/meta/globnav.jsx');
 const Intro  = require('../modules/top/intro.jsx');
 const Home = React.createClass({
@@ -30,6 +31,7 @@ const PostArchiveRow = React.createClass({
     return (
       <div className="content fullHeight" >
 		<PostArchive apiPath={API}/>
+		<Footer apiPath={rootAPI}/>
       </div>
     )
   }
@@ -40,6 +42,7 @@ const PostSingleRow = React.createClass({
     return (
       <div className="content fullHeight" >
 		<PostSingle apiPath={API} slug={this.props.params.slug}/>
+		<Footer apiPath={rootAPI}/>
       </div>
     )
   }
@@ -51,6 +54,7 @@ const About = React.createClass({
     return (
       <div className="content fullHeight" >
 		<Page apiPath={API} slug='about'/>
+		<Footer apiPath={rootAPI}/>
       </div>
     )
   }
@@ -60,6 +64,7 @@ const Contribute = React.createClass({
     return (
       <div className="content fullHeight" >
 		<Page apiPath={API} slug='contributing-to-wordpress'/>
+		<Footer apiPath={rootAPI}/>
       </div>
     )
   }
