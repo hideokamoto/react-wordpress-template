@@ -45,6 +45,18 @@ var PostArchive = React.createClass({
 		query += this.props.slug;
 		return query;
 	},
+	getTermTitle: function() {
+		if ( 'tag' == this.props.type ) {
+			var title = 'Tags:';
+		} else if ( 'category' == this.props.type ) {
+			var title = 'Category:';
+		} else {
+			return false;
+		}
+		title += this.props.slug;
+		var html = <h2 className="page-header text-center">{title}</h2>;
+		return html;
+	},
 	loadPostsFromServer: function() {
 		var termsQuery = this.getTermsQuery();
 		var initialQuery = '?per_page=' + this.state.per_page;
@@ -82,6 +94,7 @@ var PostArchive = React.createClass({
 		this.forceUpdate( this.loadPostsFromServer );
 	},
 	render: function() {
+		var termNode = this.getTermTitle();
 		var postCount = Object.keys(this.state.data).length;
 		if ( postCount < this.state.default_per_page ) {
 			var PostNavNode = '';
@@ -90,6 +103,7 @@ var PostArchive = React.createClass({
 		}
 		return (
 			<div className="contentInner">
+				{termNode}
 				<PostList postData={this.state.data} />
 				{PostNavNode}
 			</div>

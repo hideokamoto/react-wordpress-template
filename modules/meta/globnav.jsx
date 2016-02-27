@@ -8,8 +8,8 @@ var NavList = React.createClass({
 		return (
 			<div className="menuList">
 				<Link to="/" className="menuItem">{this.props.data.name}</Link>
-				<Link to="/about" className="menuItem">About</Link>
-				<Link to="/contributing-to-wordpress" className="menuItem">Contributing WordPress</Link>
+				<Link to="/about" className="menuItem hidden-xs">About</Link>
+				<Link to="/contributing-to-wordpress" className="menuItem hidden-xs">Contributing WordPress</Link>
 			</div>
 		);
 	}
