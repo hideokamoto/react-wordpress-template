@@ -152,6 +152,9 @@ html,body,.fullHeight{
 .postTitle {
 	letter-spacing: 2px;
 }
+.archiveNext {
+	cursor: pointer;
+}
 .termItem {
 	display: inline-block;
 	padding: 5px 0;

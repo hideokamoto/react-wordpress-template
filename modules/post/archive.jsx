@@ -52,7 +52,6 @@ var PostArchive = React.createClass({
 		if ( termsQuery ) {
 			apiPath += termsQuery;
 		}
-		console.log(apiPath);
 		$.ajax({
 			type: "GET",
 			url: apiPath,
@@ -83,13 +82,16 @@ var PostArchive = React.createClass({
 		this.forceUpdate( this.loadPostsFromServer );
 	},
 	render: function() {
+		var postCount = Object.keys(this.state.data).length;
+		if ( postCount < this.state.default_per_page ) {
+			var PostNavNode = '';
+		} else {
+			var PostNavNode = <PostNav page={this.state.page} perPage={this.state.default_per_page} onClickNextPage={this.addNextPage}/>;
+		}
 		return (
 			<div className="contentInner">
 				<PostList postData={this.state.data} />
-				<PostNav
-					page={this.state.page}
-					perPage={this.state.default_per_page}
-					onClickNextPage={this.addNextPage}/>
+				{PostNavNode}
 			</div>
 		);
 	}
