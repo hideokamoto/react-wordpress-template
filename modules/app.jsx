@@ -94,10 +94,6 @@ const App = React.createClass({
     return (
       <div className="fullHeight">
 	  	<Nav apiPath={rootAPI}/>
-        {/*
-          next we replace `<Child>` with `this.props.children`
-          the router will figure out the children for us
-        */}
         {this.props.children}
       </div>
     )
