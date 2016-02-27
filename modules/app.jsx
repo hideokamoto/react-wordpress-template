@@ -15,27 +15,46 @@ var Menu  = require('../modules/meta/menu.jsx');
 const Footer = require('../modules/meta/footer.jsx');
 const Nav  = require('../modules/meta/globnav.jsx');
 const Intro  = require('../modules/top/intro.jsx');
+const PostArchive = require('../modules/post/archive.jsx');
 const Home = React.createClass({
   render() {
     return (
-      <div className="content topimg fullHeight"  id="top">
-		<Intro apiPath={rootAPI}/>
-      </div>
+		<div className="fullHeight">
+			<div className="content topimg fullHeight" id="top">
+				<Intro apiPath={rootAPI}/>
+			</div>
+			<PostArchive apiPath={API}/>
+			<Footer apiPath={rootAPI}/>
+		</div>
     )
   }
 })
 
-const PostArchive = require('../modules/post/archive.jsx');
-const PostArchiveRow = React.createClass({
+const TermArchiveRow = React.createClass({
   render() {
     return (
       <div className="content fullHeight" >
-		<PostArchive apiPath={API}/>
+		<PostArchive apiPath={API} slug={this.props.slug} type={this.props.type}/>
 		<Footer apiPath={rootAPI}/>
       </div>
     )
   }
 })
+const CatArchiveRow = React.createClass({
+	render() {
+		return (
+			<TermArchiveRow slug={this.props.params.slug} type="category" />
+		)
+	}
+})
+const TagArchiveRow = React.createClass({
+	render() {
+		return (
+			<TermArchiveRow slug={this.props.params.slug} type="tag" />
+		)
+	}
+})
+
 const PostSingle = require('../modules/post/single.jsx');
 const PostSingleRow = React.createClass({
   render() {
@@ -89,11 +108,15 @@ const App = React.createClass({
 render((
   <Router history={hashHistory}>
     <Route path="/" component={App}>
-      <IndexRoute component={Home}/>
-      <Route path="/blog" component={PostArchiveRow} />
-	  <Route path="/blog/:slug" component={PostSingleRow} />
-	  <Route path="/about" component={About} />
-	  <Route path="/contributing-to-wordpress" component={Contribute} />
+		<IndexRoute component={Home}/>
+		<Route path="/about" component={About} />
+		<Route path="/contributing-to-wordpress" component={Contribute} />
+		<Route path="/:slug" component={PostSingleRow} />
+
+		<Route path="/tag/" component={TagArchiveRow} />
+		<Route path="/category/" component={CatArchiveRow} />
+		<Route path="/tag/:slug" component={TagArchiveRow} />
+		<Route path="/category/:slug" component={CatArchiveRow} />
     </Route>
   </Router>
 ), document.getElementById('app'))

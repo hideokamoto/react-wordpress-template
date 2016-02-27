@@ -7,7 +7,7 @@ var PostNav  = require('./nav.jsx');
 
 var Post = React.createClass({
 	render: function() {
-		var linkAddress = '/blog/' + this.props.post.slug;
+		var linkAddress = '/' + this.props.post.slug;
 		var date = new Date(this.props.post.date_gmt).toLocaleDateString();
 		return(
 			<Link to={{ pathname: linkAddress, state: { postId: this.props.post.id } }} className="postList page-header">
@@ -34,9 +34,25 @@ var PostList = React.createClass({
 });
 
 var PostArchive = React.createClass({
+	getTermsQuery: function() {
+		if ( 'tag' == this.props.type ) {
+			var query = 'filter[tag]=';
+		} else if ( 'category' == this.props.type ) {
+			var query = 'filter[category_name]=';
+		} else {
+			return false;
+		}
+		query += this.props.slug;
+		return query;
+	},
 	loadPostsFromServer: function() {
+		var termsQuery = this.getTermsQuery();
 		var initialQuery = '?per_page=' + this.state.per_page;
 		var apiPath = this.props.apiPath + 'posts' + initialQuery + '&' + this.state.query;
+		if ( termsQuery ) {
+			apiPath += termsQuery;
+		}
+		console.log(apiPath);
 		$.ajax({
 			type: "GET",
 			url: apiPath,
