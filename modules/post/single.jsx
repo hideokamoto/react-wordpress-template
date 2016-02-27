@@ -4,16 +4,38 @@ import { Router, Link } from 'react-router'
 
 // Component
 var Single = React.createClass({
+	getTermData: function() {
+		if ( ! this.hasTerm() ) {
+			return '';
+		}
+		var termNodes = this.props.postData['_embedded']['https://api.w.org/term'][1].map(function ( term ) {
+			var termPath = '/tag/' + term.slug;
+			return (
+				<Link to={{ pathname: termPath }} className="termItem">
+					{term.name}
+				</Link>
+			);
+		});
+		return termNodes;
+	},
+	hasTerm: function() {
+		if ( ! this.props.postData['_embedded']['https://api.w.org/term'] ) {
+			return false;
+		}
+		return true;
+	},
 	getPostContent: function() {
 		if ( ! this.props.postData ) {
 			var content  = {
 				title: { rendered : 'Loading...' },
 				content: { rendered : '' },
+				terms: 'No Tags',
 				date: ''
 			};
 		} else {
 			var content = this.props.postData;
 			content['date'] = new Date(content.date_gmt).toLocaleDateString();
+			content['terms'] = this.getTermData();
 		}
 		return content;
 	},
@@ -23,6 +45,7 @@ var Single = React.createClass({
 			<div className="postList contentInner">
 				<h3 className="postTitle page-header">{post.title.rendered}</h3>
 				<p>{post.date}</p>
+				<p>Tags: {post.terms}</p>
 				<div dangerouslySetInnerHTML={{__html: post.content.rendered}} />
 			</div>
 		);

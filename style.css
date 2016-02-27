@@ -152,6 +152,11 @@ html,body,.fullHeight{
 .postTitle {
 	letter-spacing: 2px;
 }
+.termItem {
+	display: inline-block;
+	padding: 5px 0;
+	margin-right: 10px;
+}
 
 
 /* Footer */
@@ -171,8 +176,10 @@ html,body,.fullHeight{
 	padding: 20px;
 }
 .footerSubMenuItem {
-	display: inline-block;
+	display: block;
 	padding: 5px 10px;
+	color: #fff;
+	text-align: center;
 }
 .copyright {
 	background-color: #000;
