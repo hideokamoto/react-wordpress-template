@@ -3,7 +3,8 @@ import { render } from 'react-dom'
 import { Link } from 'react-router'
 
 // Component
-var PostNav  = require('./nav.jsx');
+const PostNav  = require('./nav.jsx');
+const SearchForm  = require('../search.jsx');
 
 var Post = React.createClass({
 	render: function() {
@@ -20,11 +21,16 @@ var Post = React.createClass({
 
 var PostList = React.createClass({
 	render: function() {
-		var postNodes = this.props.postData.map(function (post) {
-			return (
-				<Post post={post} key={post.id}/ >
-			);
-		});
+		var postCount = Object.keys(this.props.postData).length;
+		if ( 0 === postCount ) {
+			var postNodes = <div className="postList page-header"></div>;
+		} else {
+			var postNodes = this.props.postData.map(function (post) {
+				return (
+					<Post post={post} key={post.id}/ >
+				);
+			});
+		}
 		return (
 			<div>
 				{postNodes}
@@ -93,6 +99,11 @@ var PostArchive = React.createClass({
 		this.setState({ per_page: next.per_page, page: next.page } );
 		this.forceUpdate( this.loadPostsFromServer );
 	},
+	changeSearch: function( searchWords ) {
+		var query = 'search=' + searchWords + '&';
+		this.setState({ query: query } );
+		this.forceUpdate( this.loadPostsFromServer );
+	},
 	render: function() {
 		var termNode = this.getTermTitle();
 		var postCount = Object.keys(this.state.data).length;
@@ -104,6 +115,7 @@ var PostArchive = React.createClass({
 		return (
 			<div className="contentInner">
 				{termNode}
+				<SearchForm onChangeSearch={this.changeSearch}/>
 				<PostList postData={this.state.data} />
 				{PostNavNode}
 			</div>

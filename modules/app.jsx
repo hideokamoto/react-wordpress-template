@@ -16,6 +16,7 @@ const Footer = require('../modules/meta/footer.jsx');
 const Nav  = require('../modules/meta/globnav.jsx');
 const Intro  = require('../modules/top/intro.jsx');
 const PostArchive = require('../modules/post/archive.jsx');
+
 const Home = React.createClass({
   render() {
     return (
