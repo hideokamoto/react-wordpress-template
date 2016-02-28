@@ -1,3 +1,14 @@
+//Redirect
+if('/' != location.pathname) {
+	var redirect_url = location.origin + '/#' + location.pathname + location.search;
+	if (document.referrer) {
+		var referrer = "referrer=" + encodeURIComponent(document.referrer);
+		redirect_url = redirect_url + (location.search ? '&' : '?') + referrer;
+	}
+	location.href = redirect_url;
+}
+
+
 // Define
 var rootAPI = 'http://wp-kyoto.net/wp-json/';
 var API  = rootAPI + 'wp/v2/';
@@ -6,7 +17,6 @@ var API  = rootAPI + 'wp/v2/';
 import React from 'react'
 import { render } from 'react-dom'
 import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router'
-
 
 /*Load Component
 var Header  = require('../modules/meta/header.jsx');
