@@ -44,7 +44,7 @@ const Home = React.createClass({
 const TermArchiveRow = React.createClass({
   render() {
     return (
-      <div className="content fullHeight" >
+      <div className="content" >
 		<PostArchive apiPath={API} slug={this.props.slug} type={this.props.type}/>
 		<Footer apiPath={rootAPI}/>
       </div>
@@ -70,7 +70,7 @@ const PostSingle = require('../modules/post/single.jsx');
 const PostSingleRow = React.createClass({
   render() {
     return (
-      <div className="content fullHeight" >
+      <div className="content" >
 		<PostSingle apiPath={API} slug={this.props.params.slug}/>
 		<Footer apiPath={rootAPI}/>
       </div>
@@ -82,7 +82,7 @@ const Page = require('../modules/page/page.jsx');
 const About = React.createClass({
   render() {
     return (
-      <div className="content fullHeight" >
+      <div className="content" >
 		<Page apiPath={API} slug='about'/>
 		<Footer apiPath={rootAPI}/>
       </div>
@@ -92,7 +92,7 @@ const About = React.createClass({
 const Contribute = React.createClass({
   render() {
     return (
-      <div className="content fullHeight" >
+      <div className="content" >
 		<Page apiPath={API} slug='contributing-to-wordpress'/>
 		<Footer apiPath={rootAPI}/>
       </div>
