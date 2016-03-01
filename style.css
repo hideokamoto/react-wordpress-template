@@ -1,3 +1,128 @@
+body,
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  color: #404040;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+dfn, cite, em, i, blockquote {
+  font-style: normal;
+  text-decoration: none;
+}
+
+em, i {
+  background: #e7e5e1;
+}
+pre {
+  font-size: 1em;
+  line-height: 1em;
+}
+body {
+  font-family: "Open Sans", "Hiragino Kaku Gothic Pro","ヒラギノ角ゴ Pro W3","メイリオ","Meiryo","ＭＳ Ｐゴシック", Helvetica, Arial, sans-serif;
+  font-weight: 400;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Bitter", "Hiragino Kaku Gothic Pro","ヒラギノ角ゴ Pro W3","メイリオ","Meiryo","ＭＳ Ｐゴシック", Helvetica, Arial, sans-serif;
+  line-height: 1;
+  margin: 24px 0;
+}
+h1 {
+  color: #b4595f;
+  font-size: 28px;
+}
+
+h2 {
+  color: #b4595f;
+  font-size: 24px;
+  font-weight: normal;
+}
+
+h3 {
+  color: #b4595f;
+  font-size: 20px;
+  font-weight: normal;
+}
+
+h4 {
+  color: #b4595f;
+  font-size: 16px;
+}
+
+h5 {
+  color: #b4595f;
+  font-size: 16px;
+}
+
+h6 {
+  font-size: 13px;
+}
+
+hr {
+  background-color: #5c544b;
+}
+
+blockquote {
+  color: #9a9283;
+  border-left: 5px solid rgba(154, 146, 131, 0.25);
+  font-size: 16px;
+  font-weight: normal;
+}
+
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  background-color: #5c544b;
+  color: #d4d4cc;
+}
+button:hover,
+input[type="button"]:hover,
+input[type="reset"]:hover,
+input[type="submit"]:hover {
+  background-color: #b4595f;
+}
+
+textarea {
+  background: #d4d4cc;
+  border: 1px solid #d4d4cc;
+}
+
+address {
+  font-style: normal;
+  margin-bottom: 24px;
+}
+
+pre {
+  padding: 20px;
+}
+
+code, kbd, tt, var {
+  font-size: 0.9em;
+}
+
+abbr, acronym {
+  border-bottom: 1px dotted #9a9283;
+}
+
+td, th {
+  border-bottom: 1px solid rgba(154, 146, 131, 0.25);
+}
+
+.contentInner a {
+  color: #b4595f;
+}
+.contentInner a:visited {
+  color: #b4595f;
+}
+.contentInner a:hover, a:focus, a:active {
+  color: #5c544b;
+}
+
 html,body,.fullHeight{
 	min-height: 100%;
 	height: 100%;
@@ -96,6 +221,9 @@ html,body,.fullHeight{
 	padding-right : 40px;
 }
 .intro.title a { color: #fff; }
+.site-title {
+	color: #fff;
+}
 
 .menuList {
 	display: -webkit-box;
