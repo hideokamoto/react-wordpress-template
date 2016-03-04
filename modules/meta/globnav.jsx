@@ -1,15 +1,14 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { Link } from 'react-router'
 
 // Component
 var NavList = React.createClass({
 	render: function() {
 		return (
 			<div className="menuList">
-				<Link to="/" className="menuItem">{this.props.data.name}</Link>
-				<Link to="/about" className="menuItem hidden-xs">About</Link>
-				<Link to="/contributing-to-wordpress" className="menuItem hidden-xs">Contributing WordPress</Link>
+				<a href="/" className="menuItem">{this.props.data.name}</a>
+				<a href="/about" className="menuItem hidden-xs">About</a>
+				<a href="/contributing-to-wordpress" className="menuItem hidden-xs">Contributing WordPress</a>
 			</div>
 		);
 	}

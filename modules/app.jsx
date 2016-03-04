@@ -1,14 +1,3 @@
-//Redirect
-if('/' != location.pathname) {
-	var redirect_url = location.origin + '/#' + location.pathname + location.search;
-	if (document.referrer) {
-		var referrer = "referrer=" + encodeURIComponent(document.referrer);
-		redirect_url = redirect_url + (location.search ? '&' : '?') + referrer;
-	}
-	location.href = redirect_url;
-}
-
-
 // Define
 var API  = rootAPI + 'wp/v2/';
 
@@ -17,10 +6,7 @@ import React from 'react'
 import { render } from 'react-dom'
 import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router'
 
-/*Load Component
-var Header  = require('../modules/meta/header.jsx');
-var Menu  = require('../modules/meta/menu.jsx');
-*/
+/* Load Component */
 const Footer = require('../modules/meta/footer.jsx');
 const Nav  = require('../modules/meta/globnav.jsx');
 const Intro  = require('../modules/top/intro.jsx');
@@ -70,7 +56,7 @@ const PostSingleRow = React.createClass({
   render() {
     return (
       <div className="content" >
-		<PostSingle apiPath={API} slug={this.props.params.slug}/>
+		<PostSingle apiPath={API} ID={this.props.ID}/>
 		<Footer apiPath={rootAPI}/>
       </div>
     )
@@ -99,30 +85,34 @@ const Contribute = React.createClass({
   }
 })
 
+const NotFound = React.createClass({
+	render() {
+		return(
+			<p>Not Found</p>
+		)
+	}
+});
+
+
 const App = React.createClass({
   render() {
+	if ( 404 == pageType ) {
+		var node = <NotFound />;
+	} else if ( 'home' == pageType ) {
+		var node = <Home />;
+	} else if ( 'post' == pageType ) {
+		var node = <PostSingleRow ID={ID} />
+	} else if ( 'page' == pageType ) {
+		var node = <Page ID={ID} apiPath={API}/>
+	}
     return (
       <div className="fullHeight">
 	  	<Nav apiPath={rootAPI}/>
-        {this.props.children}
+		{node}
       </div>
     )
   }
-})
+});
 
 //Router
-render((
-  <Router history={hashHistory}>
-    <Route path="/" component={App}>
-		<IndexRoute component={Home}/>
-		<Route path="/about" component={About} />
-		<Route path="/contributing-to-wordpress" component={Contribute} />
-		<Route path="/:slug" component={PostSingleRow} />
-
-		<Route path="/tag/" component={TagArchiveRow} />
-		<Route path="/category/" component={CatArchiveRow} />
-		<Route path="/tag/:slug" component={TagArchiveRow} />
-		<Route path="/category/:slug" component={CatArchiveRow} />
-    </Route>
-  </Router>
-), document.getElementById('app'))
+render( ( <App /> ), document.getElementById('app'));

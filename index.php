@@ -9,10 +9,30 @@
 		</style>
 		<script>
 		<?php
-		$rootApi = path_join( get_home_url(), 'wp-json/' );
+		$root = get_home_url();
+		$rootApi = path_join( $root, 'wp-json/' );
+		$id = $pageType = '';
+		if ( is_404() ) {
+			$pageType = '404';
+		} elseif ( is_home() ) {
+			$pageType = 'home';
+		} elseif ( is_singular() ) {
+			$id = get_the_ID();
+			if( is_single() ) {
+				$pageType = 'post';
+			} elseif ( is_page() ) {
+				$pageType = 'page';
+			}
+		} elseif ( is_archive() ) {
+			//@TODO:カテゴリ・タグアーカイブの処理
+			$pageType = 'archive';
+		}
 		$script = '';
 $script = <<<EOM
+var rootUrl = "$root";
 var rootAPI = "$rootApi";
+var pageType = "$pageType";
+var ID = "$id";
 EOM;
 		echo $script;
 		?>

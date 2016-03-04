@@ -1,6 +1,5 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { Router, Link } from 'react-router'
 
 // Component
 var Single = React.createClass({
@@ -9,11 +8,11 @@ var Single = React.createClass({
 			return '';
 		}
 		var termNodes = this.props.postData['_embedded']['https://api.w.org/term'][1].map(function ( term ) {
-			var termPath = '/tag/' + term.slug;
+			var termPath = term.link;
 			return (
-				<Link to={{ pathname: termPath }} className="termItem">
+				<a href={termPath} className="termItem">
 					{term.name}
-				</Link>
+				</a>
 			);
 		});
 		return termNodes;
@@ -53,15 +52,15 @@ var Single = React.createClass({
 });
 
 var PostSingle = React.createClass({
-	mixins: [ Router.State ],
 	loadPostsFromServer: function() {
+		var apiPath = this.props.apiPath + 'posts/' + this.props.ID + '?_embed';
 		$.ajax({
 			type: "GET",
-			url: this.props.apiPath + 'posts?_embed&filter[name]=' + this.props.slug,
+			url: apiPath,
 			dataType: 'json',
 			cache: false,
 			success: function(data) {
-				this.setState({data: data[0]});
+				this.setState({data: data});
 			}.bind(this),
 			error: function(xhr, status, err) {
 				console.error(this.props.url, status, err.toString());
