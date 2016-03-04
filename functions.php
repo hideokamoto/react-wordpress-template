@@ -10,3 +10,31 @@ function oribe_scripts() {
 	wp_enqueue_script( 'oribe-scripts', get_template_directory_uri() .'/app.js' , array(), '20151228', true );
 }
 add_action( 'wp_enqueue_scripts', 'oribe_scripts' );
+
+function oribe_get_helper_scripts() {
+	$root = get_home_url();
+	$rootApi = path_join( $root, 'wp-json/' );
+	$id = $pageType = '';
+	if ( is_404() ) {
+		$pageType = '404';
+	} elseif ( is_home() ) {
+		$pageType = 'home';
+	} elseif ( is_singular() ) {
+		$id = get_the_ID();
+		if( is_single() ) {
+			$pageType = 'post';
+		} elseif ( is_page() ) {
+			$pageType = 'page';
+		}
+	} elseif ( is_archive() ) {
+		//@TODO:カテゴリ・タグアーカイブの処理
+		$pageType = 'archive';
+	}
+	$script  = '<script>';
+	$script .= "var rootUrl = '{$root}';";
+	$script .= "var rootAPI = '{$rootApi}';";
+	$script .= "var pageType = '{$pageType}';";
+	$script .= "var ID = '{$id}';";
+	$script .= '</script>';
+	echo $script;
+}
