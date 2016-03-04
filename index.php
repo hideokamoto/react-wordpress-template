@@ -7,6 +7,16 @@
 		<style>
 		* { max-width: 100%;height: auto;}
 		</style>
+		<script>
+		<?php
+		$rootApi = path_join( get_home_url(), 'wp-json/' );
+		$script = '';
+$script = <<<EOM
+var rootAPI = "$rootApi";
+EOM;
+		echo $script;
+		?>
+		</script>
 	</head>
 	<body <?php body_class() ;?>>
 		<div id="app" class="fullHeight">

@@ -10,7 +10,6 @@ if('/' != location.pathname) {
 
 
 // Define
-var rootAPI = 'http://wp-kyoto.net/wp-json/';
 var API  = rootAPI + 'wp/v2/';
 
 // Load Reacts
