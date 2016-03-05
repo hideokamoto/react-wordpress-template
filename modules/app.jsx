@@ -4,7 +4,6 @@ var API  = rootAPI + 'wp/v2/';
 // Load Reacts
 import React from 'react'
 import { render } from 'react-dom'
-import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router'
 
 /* Load Component */
 const Footer = require('../modules/meta/footer.jsx');
@@ -35,20 +34,6 @@ const TermArchiveRow = React.createClass({
       </div>
     )
   }
-})
-const CatArchiveRow = React.createClass({
-	render() {
-		return (
-			<TermArchiveRow slug={this.props.params.slug} type="category" />
-		)
-	}
-})
-const TagArchiveRow = React.createClass({
-	render() {
-		return (
-			<TermArchiveRow slug={this.props.params.slug} type="tag" />
-		)
-	}
 })
 
 const PostSingle = require('../modules/post/single.jsx');
@@ -104,6 +89,10 @@ const App = React.createClass({
 		var node = <PostSingleRow ID={ID} />
 	} else if ( 'page' == pageType ) {
 		var node = <Page ID={ID} apiPath={API}/>
+	} else if ( 'tag' == pageType ) {
+		var node = <TermArchiveRow slug={termType} type="tag" />
+	} else if ( 'category' == pageType ) {
+		var node = <TermArchiveRow slug={termType} type="category" />
 	}
     return (
       <div className="fullHeight">

@@ -14,7 +14,7 @@ add_action( 'wp_enqueue_scripts', 'oribe_scripts' );
 function oribe_get_helper_scripts() {
 	$root = get_home_url();
 	$rootApi = path_join( $root, 'wp-json/' );
-	$id = $pageType = '';
+	$term = $id = $pageType = '';
 	if ( is_404() ) {
 		$pageType = '404';
 	} elseif ( is_home() ) {
@@ -29,12 +29,20 @@ function oribe_get_helper_scripts() {
 	} elseif ( is_archive() ) {
 		//@TODO:カテゴリ・タグアーカイブの処理
 		$pageType = 'archive';
+		$term = get_queried_object()->slug;
+		if ( is_tag() ) {
+			$pageType = 'tag';
+		} elseif ( is_category() ) {
+			$pageType = 'category';
+		}
 	}
 	$script  = '<script>';
 	$script .= "var rootUrl = '{$root}';";
 	$script .= "var rootAPI = '{$rootApi}';";
 	$script .= "var pageType = '{$pageType}';";
+	$script .= "var termType = '{$term}';";
 	$script .= "var ID = '{$id}';";
+	$script .= "console.log(termType);";
 	$script .= '</script>';
 	echo $script;
 }
