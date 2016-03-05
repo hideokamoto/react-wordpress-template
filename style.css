@@ -305,12 +305,12 @@ html,body,.fullHeight{
 .footerSubMenuList {
 	background-color: #333;
 	padding: 20px;
+	text-align: center;
 }
 .footerSubMenuItem {
-	display: block;
+	display: inline-block;
 	padding: 5px 10px;
 	color: #fff;
-	text-align: center;
 }
 .copyright {
 	background-color: #000;
