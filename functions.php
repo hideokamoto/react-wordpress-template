@@ -12,6 +12,13 @@ function oribe_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'oribe_scripts' );
 
+add_action( 'after_setup_theme', 'oribe_register_menu_for_api' );
+function oribe_register_menu_for_api() {
+	register_nav_menu( 'menu-api', 'For WP API MENU' );
+	register_nav_menu( 'sub-menu-api', 'For WP API SUB MENU' );
+	register_nav_menu( 'glob-api', 'For WP API GLOB MENU' );
+}
+
 function oribe_get_helper_scripts() {
 	$root = get_home_url();
 	$rootApi = path_join( $root, 'wp-json/' );
