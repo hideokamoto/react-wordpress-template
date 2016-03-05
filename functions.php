@@ -2,6 +2,7 @@
 /**
  * Enqueue scripts and styles.
  */
+add_theme_support('title-tag');
 function oribe_scripts() {
 	wp_enqueue_style( 'oribe-bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css');
 	wp_enqueue_style( 'oribe-style', get_stylesheet_uri() );
@@ -27,7 +28,6 @@ function oribe_get_helper_scripts() {
 			$pageType = 'page';
 		}
 	} elseif ( is_archive() ) {
-		//@TODO:カテゴリ・タグアーカイブの処理
 		$pageType = 'archive';
 		$term = get_queried_object()->slug;
 		if ( is_tag() ) {
@@ -42,7 +42,6 @@ function oribe_get_helper_scripts() {
 	$script .= "var pageType = '{$pageType}';";
 	$script .= "var termType = '{$term}';";
 	$script .= "var ID = '{$id}';";
-	$script .= "console.log(termType);";
 	$script .= '</script>';
 	echo $script;
 }
