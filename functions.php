@@ -52,3 +52,44 @@ function oribe_get_helper_scripts() {
 	$script .= '</script>';
 	echo $script;
 }
+
+
+add_action( 'admin_init', 'oribe_check_plugins' );
+function oribe_check_plugins (){
+	$messages = false;
+	if ( ! oribe_is_activate_plugins( 'rest-api/plugin.php' ) ) {
+		$messages[] = sprintf(
+			__( 'This Theme need %s Plugin.' , 'oribe' ),
+			sprintf(
+				'<a href="%s">WP REST API(Version2)</a>',
+				__( 'https://wordpress.org/plugins/rest-api/', 'oribe' )
+			)
+		);
+	}
+	if ( ! oribe_is_activate_plugins( 'wp-api-menus/wp-api-menus.php' ) ) {
+		$messages[] = sprintf(
+			__( 'This Theme need %s Plugin.' , 'oribe' ),
+			sprintf(
+				'<a href="%s">WP API Menus</a>',
+				__( 'https://wordpress.org/plugins/wp-api-menus/faq/', 'oribe' )
+			)
+		);
+	}
+	if ( $messages ) {
+		$html  = "<div class='error'><ul>";
+		foreach ( $messages as $message ) {
+			$html .= "<li>{$message}</li>";
+		}
+		$html .= '</ul></div>';
+		echo $html;
+	}
+}
+
+function oribe_is_activate_plugins( $plugin ) {
+	$activePlugins = get_option('active_plugins');
+	if ( ! array_search( $plugin, $activePlugins ) && file_exists( WP_PLUGIN_DIR. '/'. $plugin ) ) {
+		return false;
+	} else {
+		return true;
+	}
+}
