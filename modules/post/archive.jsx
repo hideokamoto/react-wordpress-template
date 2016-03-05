@@ -1,6 +1,5 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { Link } from 'react-router'
 
 // Component
 const PostNav  = require('./nav.jsx');
@@ -11,10 +10,10 @@ var Post = React.createClass({
 		var linkAddress = '/' + this.props.post.slug;
 		var date = new Date(this.props.post.date_gmt).toLocaleDateString();
 		return(
-			<Link to={{ pathname: linkAddress, state: { postId: this.props.post.id } }} className="postList page-header">
+			<a href={linkAddress} className="postList page-header">
 				<p>{date}</p>
 				<h3 className="postTitle">{this.props.post.title.rendered}</h3>
-			</Link>
+			</a>
 		);
 	}
 });

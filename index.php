@@ -7,6 +7,7 @@
 		<style>
 		* { max-width: 100%;height: auto;}
 		</style>
+		<?php oribe_get_helper_scripts(); ?>
 	</head>
 	<body <?php body_class() ;?>>
 		<div id="app" class="fullHeight">

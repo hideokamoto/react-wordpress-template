@@ -16,11 +16,12 @@ const CopyRight = React.createClass({
 var Footer = React.createClass({
 	render: function() {
 		var menuAPI = this.props.apiPath + 'wp-api-menus/v2/';
-		//var footerMenuApi = menuAPI + 'menu-locations/menu-api';
+		var footerMenuApi = menuAPI + 'menu-locations/menu-api';
 		var footerSubMenuApi = menuAPI + 'menu-locations/sub-menu-api';
 		return (
 			<div className="footer">
 				<FooterMenu apiPath={footerSubMenuApi} prefix='footer'/>
+				<FooterMenu apiPath={footerMenuApi} prefix='footerSub'/>
 				<div className="footerSubMenuList" >
 					<p className="footerSubMenuItem" href="http://wp-kyoto.net/about/">React Themeのテスト中・・・</p>
 				</div>

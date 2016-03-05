@@ -1,6 +1,5 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { Router, Link } from 'react-router'
 
 // Component
 var Single = React.createClass({
@@ -30,16 +29,15 @@ var Single = React.createClass({
 });
 
 var Page = React.createClass({
-	mixins: [ Router.State ],
 	loadPostsFromServer: function() {
-	console.log(this.props.slug);
+		var apiPath = this.props.apiPath + 'pages/' + this.props.ID + '?_embed';
 		$.ajax({
 			type: "GET",
-			url: this.props.apiPath + 'pages?_embed&filter[name]=' + this.props.slug,
+			url: apiPath,
 			dataType: 'json',
 			cache: false,
 			success: function(data) {
-				this.setState({data: data[0]});
+				this.setState({data: data});
 			}.bind(this),
 			error: function(xhr, status, err) {
 				console.error(this.props.url, status, err.toString());
